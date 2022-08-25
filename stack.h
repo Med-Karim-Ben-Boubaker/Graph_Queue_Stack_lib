@@ -1,17 +1,19 @@
 #ifndef __STACK_H__
 #define __STACK_H__
-#define SIZE 40
 
 struct stack {
-    int items[SIZE];
+    int* items;
     int head;
+    int size;
 };
 
-struct stack* createStack();
+struct stack* createStack(int size);
 void push(struct stack* stack, int);
 int pop(struct stack* stack);
 void displayStack(struct stack* stack);
 int isEmptyStack(struct stack* satck);
 void printStack(struct stack* stack);
+void resetStack(struct stack* stack);
+void resizeStack(struct stack* stack, int newSize);
 
 #endif
