@@ -1,18 +1,19 @@
 #ifndef __QUEUE_H__
 #define __QUEUE_H__
-#define SIZE 40
+
 
 struct queue {
-  int items[SIZE];
+  int* items;
   int front;
   int rear;
+  int size;
 };
 
-struct queue* createQueue();
+struct queue* createQueue(int size);
 void enqueue(struct queue* q, int);
 int dequeue(struct queue* q);
-void display(struct queue* q);
-int isEmpty(struct queue* q);
-void printQueue(struct queue* q);
-
+void displayQueue(struct queue* q);
+int isEmptyQueue(struct queue* q);
+void resizeQueue(struct queue* q, int newSize);
+void resetQueue(struct queue* q);
 #endif

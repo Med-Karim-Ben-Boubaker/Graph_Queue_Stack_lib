@@ -43,15 +43,14 @@ void addEdge(struct Graph* graph, int src, int dest) {
 
 // BFS algorithm
 void bfs(struct Graph* graph, int startVertex) {
-  struct queue* q = createQueue();
+  struct queue* q = createQueue(graph->numVertices);
 
   graph->visited[startVertex] = 1;
   enqueue(q, startVertex);
 
-  while (!isEmpty(q)) {
-    printQueue(q);
+  while (!isEmptyQueue(q)) {
     int currentVertex = dequeue(q);
-    printf("Visited %d\n", currentVertex);
+    printf("Visited %d \n", currentVertex);
 
     struct node* temp = graph->adjLists[currentVertex];
 

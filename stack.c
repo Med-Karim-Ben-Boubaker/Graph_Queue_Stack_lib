@@ -43,7 +43,7 @@ int isEmptyStack(struct stack* stack){
 }
 
 //Showing stack elements
-void printStack(struct stack* stack){
+void displayStack(struct stack* stack){
     if(isEmptyStack(stack)){
         printf("Stack is empty");
         return;
@@ -52,7 +52,7 @@ void printStack(struct stack* stack){
     printf("Stack Items: ");
     int i;
     for(i=stack->head; i>=0; i--){
-        printf("%d,", stack->items[i]);
+        printf("%d, ", stack->items[i]);
     }
     printf("\n");
 }

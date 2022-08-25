@@ -3,15 +3,17 @@
 #include "queue.h"
 
 // Create a queue
-struct queue* createQueue() {
+struct queue* createQueue(int size) {
   struct queue* q = malloc(sizeof(struct queue));
+  q->items = (int*)malloc(size * sizeof(int));
   q->front = -1;
   q->rear = -1;
+  q->size = size;
   return q;
 }
 
 // Check if the queue is empty
-int isEmpty(struct queue* q) {
+int isEmptyQueue(struct queue* q) {
   if (q->rear == -1)
     return 1;
   else
@@ -20,8 +22,8 @@ int isEmpty(struct queue* q) {
 
 // Adding elements into queue
 void enqueue(struct queue* q, int value) {
-  if (q->rear == SIZE - 1)
-    printf("\nQueue is Full!!");
+  if (q->rear == q->size - 1)
+    printf("Queue Overflow \n");
   else {
     if (q->front == -1)
       q->front = 0;
@@ -33,14 +35,14 @@ void enqueue(struct queue* q, int value) {
 // Removing elements from queue
 int dequeue(struct queue* q) {
   int item;
-  if (isEmpty(q)) {
-    printf("Queue is empty");
+  if (isEmptyQueue(q)) {
+    printf("Queue Underflow \n");
     item = -1;
   } else {
     item = q->items[q->front];
     q->front++;
     if (q->front > q->rear) {
-      printf("Resetting queue ");
+      printf("Resetting queue \n");
       q->front = q->rear = -1;
     }
   }
@@ -48,15 +50,31 @@ int dequeue(struct queue* q) {
 }
 
 // Print the queue
-void printQueue(struct queue* q) {
+void displayQueue(struct queue* q) {
   int i = q->front;
 
-  if (isEmpty(q)) {
-    printf("Queue is empty");
+  if (isEmptyQueue(q)) {
+    printf("Queue is empty \n");
   } else {
-    printf("\nQueue contains \n");
+    printf("Queue Items: ");
     for (i = q->front; i < q->rear + 1; i++) {
-      printf("%d ", q->items[i]);
+      printf("%d, ", q->items[i]);
     }
+    printf("\n");
   }
+}
+
+//Resetting the queue
+void resetQueue(struct queue* q){
+  if(isEmptyQueue((q))){
+    printf("Queue is empty, resetting is not possible");
+    return;
+  }
+
+  q->front = q->rear = -1;
+}
+
+void resizeQueue(struct queue* q, int newSize){
+  q->size = newSize;
+  q->items = (int*) realloc (q->items, newSize);
 }

@@ -12,7 +12,6 @@ void push(struct stack* stack, int);
 int pop(struct stack* stack);
 void displayStack(struct stack* stack);
 int isEmptyStack(struct stack* satck);
-void printStack(struct stack* stack);
 void resetStack(struct stack* stack);
 void resizeStack(struct stack* stack, int newSize);
 
