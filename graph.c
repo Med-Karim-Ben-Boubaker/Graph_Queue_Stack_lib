@@ -4,10 +4,11 @@
 #include "queue.h"
 
 // Creating a node
-struct node* createNode(int v) {
+struct node* createNode(int v, int weight) {
   struct node* newNode = malloc(sizeof(struct node));
   newNode->vertex = v;
   newNode->next = NULL;
+  newNode->weight = weight;
   return newNode;
 }
 
@@ -31,19 +32,32 @@ struct Graph* createGraph(int vertices) {
 // Add edge
 void addEdge(struct Graph* graph, int src, int dest) {
   // Add edge from src to dest
-  struct node* newNode = createNode(dest);
+  struct node* newNode = createNode(dest, 0);
   newNode->next = graph->adjLists[src];
   graph->adjLists[src] = newNode;
 
   // Add edge from dest to src
-  newNode = createNode(src);
+  newNode = createNode(src, 0);
+  newNode->next = graph->adjLists[dest];
+  graph->adjLists[dest] = newNode;
+}
+
+// Add weighted edge
+void addWeightEdge(struct Graph* graph, int src, int dest, int weight){
+  // Add edge from src to dest
+  struct node* newNode = createNode(dest, weight);
+  newNode->next = graph->adjLists[src];
+  graph->adjLists[src] = newNode;
+
+  // Add edge from dest tp src
+  newNode = createNode(src, weight);
   newNode->next = graph->adjLists[dest];
   graph->adjLists[dest] = newNode;
 }
 
 // BFS algorithm
 void bfs(struct Graph* graph, int startVertex) {
-  struct queue* q = createQueue(graph->numVertices);
+  struct queue* q = createQueue(graph->numVertices + 10);
 
   graph->visited[startVertex] = 1;
   enqueue(q, startVertex);
@@ -65,6 +79,7 @@ void bfs(struct Graph* graph, int startVertex) {
     }
   }
 }
+
 
 // DFS algorithm
 void dfs(struct Graph* graph, int startVertex){

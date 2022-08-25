@@ -42,7 +42,7 @@ int dequeue(struct queue* q) {
     item = q->items[q->front];
     q->front++;
     if (q->front > q->rear) {
-      printf("Resetting queue \n");
+      //printf("Resetting queue \n");
       q->front = q->rear = -1;
     }
   }

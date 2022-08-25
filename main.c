@@ -1,21 +1,18 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "stack.h"
-#include "queue.h"
 #include "graph.h"
 
 
 int main() {
   struct Graph* graph = createGraph(6);
-  addEdge(graph, 0, 1);
-  addEdge(graph, 0, 2);
-  addEdge(graph, 1, 2);
-  addEdge(graph, 1, 4);
-  addEdge(graph, 1, 3);
-  addEdge(graph, 2, 4);
-  addEdge(graph, 3, 4);
+  addWeightEdge(graph, 0, 1, 1);
+  addWeightEdge(graph, 1, 2, 2);
+  addWeightEdge(graph, 1, 4, 3);
+  addWeightEdge(graph, 1, 3, 4);
+  addWeightEdge(graph, 2, 4, 5);
+  addWeightEdge(graph, 3, 4, 6);
 
-  dfs(graph, 0);
+  bfsw(graph, 0);
 
   return 0;
 }
